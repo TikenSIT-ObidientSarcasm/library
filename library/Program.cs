@@ -19,6 +19,8 @@ builder.Services.AddSingleton(dataSource);
 builder.Services.AddScoped<BookRepository>();
 // Repositories: one new member per web request.
 builder.Services.AddScoped<MemberRepository>();
+// Repositories: one new notes per web request
+builder.Services.AddScoped<NotesRepository>();
 
 var app = builder.Build();
 
