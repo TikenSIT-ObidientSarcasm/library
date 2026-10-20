@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 
-namespace library.Data;
+namespace library.data;
 
 // Every SQL statement about members lives in this one class.
 public class MemberRepository
