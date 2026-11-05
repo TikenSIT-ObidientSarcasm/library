@@ -1,0 +1,53 @@
+﻿
+@model library.Models.Note
+
+@{
+    ViewData["Title"] = "Edit a Note";
+}
+
+<h1 class="mb-3">Edit a Note</h1>
+
+<form asp-controller="Notes"
+      asp-action="Edit"
+      asp-route-id="@Model.note_id"
+      method="post"
+      class="card card-body"
+      style="max-width:36rem">
+
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="note_id" />
+
+    <div class="mb-3">
+        <label class="form-label">Note ID</label>
+        <input value="@Model.note_id"
+               class="form-control"
+               readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="title" class="form-label">Title</label>
+        <input asp-for="title" class="form-control" />
+        <span asp-validation-for="title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="body" class="form-label">Body</label>
+        <textarea asp-for="body"
+                  class="form-control"
+                  rows="5"></textarea>
+        <span asp-validation-for="body" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Created On</label>
+        <input value="@(Model.created_on?.ToString() ?? "—")"
+               class="form-control"
+               readonly />
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a asp-action="Index" class="btn btn-link">Cancel</a>
+    </div>
+</form>
