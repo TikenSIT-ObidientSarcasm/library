@@ -558,3 +558,109 @@ a:focus-visible,
     align-items: center;
 }
 
+css
+/* =================================
+   TASK 12 - PAGE CUSTOMIZATION
+   ================================= */
+.page-banner {
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-banner h1 {
+    text-shadow: 0 0 12px rgba(255, 230, 109, 0.4);
+}
+
+.card {
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 5px 7px 0 var(--shadow);
+    }
+
+.card-header {
+    border-radius: 8px 8px 0 0 !important;
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0 4px;
+}
+
+    .table tbody tr {
+        transition: background 0.2s ease;
+    }
+
+    .table tbody td {
+        padding: 15px 12px;
+    }
+
+    .table .badge {
+        padding: 8px 12px;
+        font-size: 0.78rem;
+        letter-spacing: 0.5px;
+    }
+
+.bg-success {
+    color: #071b08 !important;
+    background-color: var(--green) !important;
+}
+
+.bg-danger {
+    color: white !important;
+    background-color: #bd294d !important;
+}
+
+.bg-warning {
+    color: #171020 !important;
+    background-color: var(--gold) !important;
+}
+
+.bg-info {
+    color: #101820 !important;
+    background-color: var(--cyan) !important;
+}
+
+.table .btn {
+    margin: 3px;
+}
+
+.navbar {
+    border-radius: 0 0 10px 10px;
+}
+
+.navbar-toggler {
+    border: 2px solid var(--gold);
+    background-color: var(--stone);
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+.home-banner {
+    padding: 55px 20px;
+}
+
+    .home-banner .btn {
+        margin: 5px;
+    }
+
+@media (max-width: 768px) {
+    .d-flex.justify-content-between {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+        .d-flex.justify-content-between .btn {
+            width: 100%;
+        }
+
+    .home-banner {
+        padding: 30px 12px;
+    }
+}

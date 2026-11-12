@@ -1,49 +1,60 @@
-﻿@model List<library.Models.Note>
+﻿cshtml
+@model List<library.Models.Note>
 
 @{
     ViewData["Title"] = "Notes";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <div>
-        <h1 class="mb-0">Notes</h1>
-        <p class="text-muted mb-0">@Model.Count notes in the catalogue</p>
-    </div>
-    <a asp-action="Create" class="btn btn-primary">Add a Note</a>
+<div class="page-banner">
+    <h1>📜 Library Scrolls</h1>
+    <p>Keep important library information and records</p>
 </div>
 
-<table class="table table-striped table-hover align-middle">
-    <thead class="table-dark">
-        <tr>
-            <th class="text-end" style="width:4rem">#</th>
-            <th>Title</th>
-            <th>Body</th>
-            <th>Created On</th>
-            <th style="width:10rem"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var note in Model)
-        {
-            <tr>
-                <td class="text-end">@note.note_id</td>
-                <td>@note.title</td>
-                <td>
-                    @(string.IsNullOrEmpty(note.body) ? "—" : note.body)
-                </td>
-                <td>
-                    @(note.created_on ?? "—")
-                </td>
-                <td class="text-end">
-                    <a asp-action="Edit"
-                       asp-route-id="@note.note_id"
-                       class="btn btn-sm btn-outline-secondary">Edit</a>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h2>📝 My Notes</h2>
+        <p class="text-muted mb-0">✦ @Model.Count notes stored in the library</p>
+    </div>
+    <a asp-action="Create" class="btn btn-primary">➕ Add a Note</a>
+</div>
 
-                    <a asp-action="Delete"
-                       asp-route-id="@note.note_id"
-                       class="btn btn-sm btn-outline-danger">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="card">
+    <div class="card-header">
+        📚 Saved Library Notes
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>📌 Title</th>
+                        <th>📝 Body</th>
+                        <th>📅 Created On</th>
+                        <th>⚙️ Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var note in Model)
+                    {
+                        <tr>
+                            <td>@note.note_id</td>
+                            <td><strong>@note.title</strong></td>
+                            <td>@(string.IsNullOrEmpty(note.body) ? "—" : note.body)</td>
+                            <td>@(note.created_on ?? "—")</td>
+                            <td>
+                                <a asp-action="Edit"
+                                   asp-route-id="@note.note_id"
+                                   class="btn btn-secondary btn-sm">✏️ Edit</a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@note.note_id"
+                                   class="btn btn-danger btn-sm">🗑️ Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,47 @@
-﻿@{
+﻿cshtml
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="page-banner home-banner">
+    <h1>🏰 Welcome to the Retro Dungeon Library!</h1>
+    <p>Your adventure into the world of books begins here.</p>
+    <div class="mt-4">
+        <a asp-controller="Books" asp-action="Index" class="btn btn-primary">📚 Explore Books</a>
+        <a asp-controller="Loans" asp-action="Index" class="btn btn-info">📖 View Loans</a>
+        <a asp-controller="Members" asp-action="Index" class="btn btn-success">👥 Members</a>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h2>📚</h2>
+                <h3>Books</h3>
+                <p>Discover the library collection.</p>
+                <a asp-controller="Books" asp-action="Index" class="btn btn-primary">Open Catalogue</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h2>📖</h2>
+                <h3>Loans</h3>
+                <p>Manage borrowed and returned books.</p>
+                <a asp-controller="Loans" asp-action="Index" class="btn btn-info">Manage Loans</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h2>👥</h2>
+                <h3>Members</h3>
+                <p>Manage your library members.</p>
+                <a asp-controller="Members" asp-action="Index" class="btn btn-success">View Members</a>
+            </div>
+        </div>
+    </div>
 </div>
