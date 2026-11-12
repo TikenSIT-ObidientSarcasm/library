@@ -13,9 +13,9 @@
     @Html.AntiForgeryToken()
 
     <div class="mb-3">
-        <label asp-for="Full_Name" class="form-label">Name</label>
-        <input asp-for="Full_Name" class="form-control" />
-        <span asp-validation-for="Full_Name" class="text-danger"></span>
+        <label asp-for="FullName" class="form-label">Name</label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
@@ -25,14 +25,14 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="Member_type" class="form-label">Member Type</label>
-        <select asp-for="Member_type" class="form-select">
+        <label asp-for="MemberType" class="form-label">Member Type</label>
+        <select asp-for="MemberType" class="form-select">
             <option value="">-- Select Member Type --</option>
             <option value="Student">Student</option>
             <option value="Faculty">Faculty</option>
             <option value="Regular">Regular</option>
         </select>
-        <span asp-validation-for="Member_type" class="text-danger"></span>
+        <span asp-validation-for="MemberType" class="text-danger"></span>
     </div>
 
     <div>

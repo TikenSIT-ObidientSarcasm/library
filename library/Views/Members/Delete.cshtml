@@ -17,16 +17,16 @@
 
     <dl class="row mb-3">
         <dt class="col-4">ID</dt>
-        <dd class="col-8">@Model.Member_id</dd>
+        <dd class="col-8">@Model.MemberId</dd>
 
         <dt class="col-4">Name</dt>
-        <dd class="col-8">@Model.Full_Name</dd>
+        <dd class="col-8">@Model.FullName</dd>
 
         <dt class="col-4">Email</dt>
         <dd class="col-8">@(Model.Email ?? "—")</dd>
 
         <dt class="col-4">Member Type</dt>
-        <dd class="col-8">@(Model.Member_type ?? "—")</dd>
+        <dd class="col-8">@(Model.MemberType ?? "—")</dd>
     </dl>
 
     <p class="text-muted small">
@@ -34,7 +34,7 @@
     </p>
 
     <form asp-action="Delete"
-          asp-route-id="@Model.Member_id"
+          asp-route-id="@Model.MemberId"
           method="post">
 
         @Html.AntiForgeryToken()

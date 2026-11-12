@@ -26,21 +26,21 @@
         @foreach (var member in Model)
         {
             <tr>
-                <td class="text-end">@member.Member_id</td>
-                <td>@member.Full_Name</td>
+                <td class="text-end">@member.MemberId</td>
+                <td>@member.FullName</td>
                 <td>
                     @(member.Email ?? "—")
                 </td>
                 <td>
-                    @(member.Member_type ?? "—")
+                    @(member.MemberType ?? "—")
                 </td>
                 <td class="text-end">
                     <a asp-action="Edit"
-                       asp-route-id="@member.Member_id"
+                       asp-route-id="@member.MemberId"
                        class="btn btn-sm btn-outline-secondary">Edit</a>
 
                     <a asp-action="Delete"
-                       asp-route-id="@member.Member_id"
+                       asp-route-id="@member.MemberId"
                        class="btn btn-sm btn-outline-danger">Delete</a>
                 </td>
             </tr>

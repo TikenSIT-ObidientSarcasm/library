@@ -18,10 +18,10 @@ public class MemberRepository
     {
         return new Member
         {
-            Member_id = reader.GetInt64(0),
-            Full_Name = reader.GetString(1),
+            MemberId = reader.GetInt64(0),
+            FullName = reader.GetString(1),
             Email = reader.IsDBNull(2) ? null : reader.GetString(2),
-            Member_type = reader.IsDBNull(3) ? null : reader.GetString(3)
+            MemberType = reader.IsDBNull(3) ? null : reader.GetString(3)
         };
     }
 
@@ -75,11 +75,11 @@ public class MemberRepository
 
         await using var command = _dataSource.CreateCommand(sql);
 
-        command.Parameters.AddWithValue("full_name", member.Full_Name);
+        command.Parameters.AddWithValue("full_name", member.FullName);
         command.Parameters.AddWithValue(
             "email", (object?)member.Email ?? DBNull.Value);
         command.Parameters.AddWithValue(
-            "member_type", (object?)member.Member_type ?? DBNull.Value);
+            "member_type", (object?)member.MemberType ?? DBNull.Value);
 
         await command.ExecuteNonQueryAsync();
     }
@@ -96,12 +96,12 @@ public class MemberRepository
 
         await using var command = _dataSource.CreateCommand(sql);
 
-        command.Parameters.AddWithValue("full_name", member.Full_Name);
+        command.Parameters.AddWithValue("full_name", member.FullName);
         command.Parameters.AddWithValue(
             "email", (object?)member.Email ?? DBNull.Value);
         command.Parameters.AddWithValue(
-            "member_type", (object?)member.Member_type ?? DBNull.Value);
-        command.Parameters.AddWithValue("member_id", member.Member_id);
+            "member_type", (object?)member.MemberType ?? DBNull.Value);
+        command.Parameters.AddWithValue("member_id", member.MemberId);
 
         await command.ExecuteNonQueryAsync();
     }
