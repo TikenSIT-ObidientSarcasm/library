@@ -19,6 +19,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
+            <th class="text-end">Books out</th>
             <th style="width:10rem"></th>
         </tr>
     </thead>
@@ -43,6 +44,7 @@
                        asp-route-id="@member.MemberId"
                        class="btn btn-sm btn-outline-danger">Delete</a>
                 </td>
+                <td class="text-end">@member.OpenLoans</td>
             </tr>
         }
     </tbody>
