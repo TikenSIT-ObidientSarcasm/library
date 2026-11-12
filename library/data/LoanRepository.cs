@@ -61,18 +61,14 @@ public class LoanRepository
     // The check and the INSERT run inside one transaction: both happen, or neither does.
     public async Task<bool> BorrowAsync(long memberId, long bookId, int daysAllowed)
     {
-        // 1. Open one connection to the database.
         await using var connection = await _dataSource.OpenConnectionAsync();
-        // 2. Start a transaction on that connection.
         await using var transaction = await connection.BeginTransactionAsync();
-        // 3. Lock this member's row: a second borrow for the same member waits until this one ends.
         await using (var lockMember = new NpgsqlCommand(
             "SELECT member_id FROM lending.member WHERE member_id = @member_id FOR UPDATE;", connection, transaction))
         {
             lockMember.Parameters.AddWithValue("member_id", memberId);
             await lockMember.ExecuteNonQueryAsync();
         }
-        // 4. Count the books this member has out.
         long openLoans;
         await using (var count = new NpgsqlCommand(
             "SELECT COUNT(*) FROM lending.loan WHERE member_id = @member_id AND returned_on IS NULL;", connection, transaction))
@@ -83,13 +79,9 @@ public class LoanRepository
 
         if (openLoans >= MaxOpenLoans)
         {
-            // 6. Undo the transaction: nothing is saved.
             await transaction.RollbackAsync();
-            // 7. Report that nothing was borrowed.
             return false;
         }
-
-        // 8. Record the loan. The database fills loaned_on with today's date.
         await using (var insert = new NpgsqlCommand(
             "INSERT INTO lending.loan (member_id, book_id, days_allowed) VALUES (@member_id, @book_id, @days_allowed);",
             connection, transaction))
@@ -99,11 +91,23 @@ public class LoanRepository
             insert.Parameters.AddWithValue("days_allowed", daysAllowed);
             await insert.ExecuteNonQueryAsync();
         }
-
-        // 9. Make the transaction permanent.
         await transaction.CommitAsync();
-        // 10. Report that the book was borrowed.
         return true;
     }
+
+    // RETURN: mark a loan as returned today. A loan already returned is left alone.
+    public async Task ReturnAsync(long loanId)
+    {
+        // 1. The SQL: today's date, set only on a loan not returned yet.
+        const string sql = "UPDATE lending.loan SET returned_on = CURRENT_DATE " +
+                   "WHERE loan_id = @id AND returned_on IS NULL;";
+        // 2. A command that will run the SQL.
+        await using var command = _dataSource.CreateCommand(sql);
+        // 3. Give the command the loan's id.
+        command.Parameters.AddWithValue("id", loanId);
+        // 4. Run it.
+        await command.ExecuteNonQueryAsync();
+    }
+
 
 }
